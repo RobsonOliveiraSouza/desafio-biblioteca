@@ -1,5 +1,6 @@
 package br.com.robsonsouza.desafiobiblioteca.service;
 
+import br.com.robsonsouza.desafiobiblioteca.dto.EmprestimoDto;
 import br.com.robsonsouza.desafiobiblioteca.entity.Emprestimo;
 import br.com.robsonsouza.desafiobiblioteca.entity.Livro;
 import br.com.robsonsouza.desafiobiblioteca.entity.Usuario;
@@ -21,9 +22,9 @@ public class EmprestimoService {
         private LivroRepository livroRepository;
         private UsuarioRepository usuarioRepository;
 
-        public Emprestimo create(Long livro_id, Emprestimo emprestimo) {
-            Optional<Livro> livro = livroRepository.findById(livro_id);
-            Optional<Usuario> usuario = usuarioRepository.findById(emprestimo.getUsuario().getId());
+        public Emprestimo create(EmprestimoDto emprestimoDto) {
+            Optional<Livro> livro = livroRepository.findByIsbn(emprestimoDto.getIsbn());
+            Optional<Usuario> usuario = usuarioRepository.findByEmail(emprestimoDto.getEmail());
 
             if (livro.isEmpty() || usuario.isEmpty()) {
                 throw new IllegalArgumentException("Livro ou Usuario não encontrado");
@@ -33,15 +34,17 @@ public class EmprestimoService {
                 throw new IllegalArgumentException("Livro já está emprestado!");
             }
 
+            Emprestimo emprestimo = new Emprestimo();
+
             emprestimo.setLivro(livro.get());
             emprestimo.setUsuario(usuario.get());
-            emprestimo.setData_emprestimo(new Date());
+            emprestimo.setDataEmprestimo(new Date());
             emprestimo.setStatus("EMPRESTADO");
 
             return emprestimoRepository.save(emprestimo);
         }
 
-        public Emprestimo update(Long id, String status, Date data_devolucao) {
+        public Emprestimo update(Long id, EmprestimoDto emprestimoDto) {
             Optional<Emprestimo> EmprestimoOptional = emprestimoRepository.findById(id);
 
             if (EmprestimoOptional.isEmpty()) {
@@ -50,15 +53,17 @@ public class EmprestimoService {
 
             Emprestimo emprestimo = EmprestimoOptional.get();
 
-            if(status.equalsIgnoreCase("LIBERADO")){
+            String status = emprestimoDto.getStatus();
+            if (status.equalsIgnoreCase("LIBERADO")) {
                 emprestimo.setStatus(status);
-                emprestimo.setData_devolucao(data_devolucao != null ? data_devolucao : new Date());
+                emprestimo.setDataDevolucao(new Date());
             } else if (status.equalsIgnoreCase("EMPRESTADO")) {
                 emprestimo.setStatus(status);
-                emprestimo.setData_devolucao(null);
+                emprestimo.setDataDevolucao(null);
             } else {
                 throw new IllegalArgumentException("Status inválido! Use 'EMPRESTADO' ou 'LIBERADO'.");
             }
+
             return emprestimoRepository.save(emprestimo);
         }
 

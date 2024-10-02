@@ -24,12 +24,15 @@ public class Livro {
     private String autor;
 
     @NotBlank(message = "ISBN invalido!")
+    @Column(unique = true, nullable = false)
     private String isbn;
 
     @Past(message = "A data de publicação é invalida!")
     @NotNull(message = "a data da publicação não pode ser vazia!")
-    private Date data_publicacao;
+    private Date dataPublicacao;
 
     @NotBlank(message = "a categoria do livro não pode estar em branco!")
     private String categoria;
+
+    private boolean ativo = true;
 }

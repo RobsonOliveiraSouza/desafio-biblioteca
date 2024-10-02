@@ -1,24 +1,27 @@
 package br.com.robsonsouza.desafiobiblioteca.service;
 
 import br.com.robsonsouza.desafiobiblioteca.entity.Usuario;
+import br.com.robsonsouza.desafiobiblioteca.repository.EmprestimoRepository;
 import br.com.robsonsouza.desafiobiblioteca.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final EmprestimoRepository emprestimoRepository;
 
     public Usuario create(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
     public List<Usuario> list() {
-        return usuarioRepository.findAll();
+        return usuarioRepository.findAllAtivos();
     }
 
     public Usuario findById(Long id) {
@@ -37,6 +40,19 @@ public class UsuarioService {
     }
 
     public void delete(Long id) {
-        usuarioRepository.deleteById(id);
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
+
+        if (usuarioOptional.isPresent()) {
+            Usuario usuario = usuarioOptional.get();
+
+            if (emprestimoRepository.existsByUsuarioAndStatus(usuario, "EMPRESTADO")) {
+                throw new IllegalStateException("Usuário não pode ser excluído porque possui empréstimos ativos.");
+            }
+
+            usuario.setAtivo(false);
+            usuarioRepository.save(usuario);
+        } else {
+            throw new IllegalArgumentException("Usuário não encontrado");
+        }
     }
 }

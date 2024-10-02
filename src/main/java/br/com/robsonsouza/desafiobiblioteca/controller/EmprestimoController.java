@@ -1,5 +1,6 @@
 package br.com.robsonsouza.desafiobiblioteca.controller;
 
+import br.com.robsonsouza.desafiobiblioteca.dto.EmprestimoDto;
 import br.com.robsonsouza.desafiobiblioteca.entity.Emprestimo;
 import br.com.robsonsouza.desafiobiblioteca.service.EmprestimoService;
 import lombok.AllArgsConstructor;
@@ -10,20 +11,20 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/emprestimo")
 @AllArgsConstructor
 public class EmprestimoController {
     private final EmprestimoService emprestimoService;
 
-    @PostMapping("/livro/{livro_id}")
-    public ResponseEntity<Emprestimo> create (@PathVariable Long livro_id, @RequestBody Emprestimo emprestimo){
-        Emprestimo novoEmprestimo = emprestimoService.create(livro_id, emprestimo);
+    @PostMapping
+    public ResponseEntity<Emprestimo> create(@RequestBody EmprestimoDto emprestimoDto) {
+        Emprestimo novoEmprestimo = emprestimoService.create(emprestimoDto);
         return ResponseEntity.ok(novoEmprestimo);
     }
 
-    @PutMapping("/livro/{livro_id}")
-    public ResponseEntity<Emprestimo> update(@PathVariable Long id, @RequestParam String status, @RequestParam(required = false) Date data_devolucao) {
-        Emprestimo atualizado = emprestimoService.update(id, status, data_devolucao);
+    @PutMapping("/{id}")
+    public ResponseEntity<Emprestimo> update(@PathVariable Long id, @RequestBody EmprestimoDto emprestimoDto) {
+        Emprestimo atualizado = emprestimoService.update(id, emprestimoDto);
         return ResponseEntity.ok(atualizado);
     }
 

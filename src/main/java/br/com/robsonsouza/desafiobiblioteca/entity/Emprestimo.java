@@ -29,10 +29,10 @@ public class Emprestimo {
 
     @NotNull(message = "A data de emprestimo está em branco")
     @Past(message = "A data de emprestimo é invalida!")
-    private Date data_emprestimo;
+    private Date dataEmprestimo;
 
     @NotNull(message = "A data de devolução está em branco")
-    private Date data_devolucao;
+    private Date dataDevolucao;
 
     @NotBlank(message = "O campo status não pode estar vazio")
     private String status;
