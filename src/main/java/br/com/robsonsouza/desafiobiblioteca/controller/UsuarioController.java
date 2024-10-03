@@ -3,7 +3,6 @@ package br.com.robsonsouza.desafiobiblioteca.controller;
 import br.com.robsonsouza.desafiobiblioteca.entity.Usuario;
 import br.com.robsonsouza.desafiobiblioteca.service.UsuarioService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

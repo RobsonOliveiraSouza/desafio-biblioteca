@@ -24,6 +24,10 @@ public class LivroService {
         return livroRepository.findAllAtivos();
     }
 
+    public List<Livro> listByCategoria(String categoria) {
+        return livroRepository.findByCategoriaAndAtivoTrue(categoria);
+    }
+
     public Livro findById(Long id) {
         return livroRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Livro não encontrado!"));
@@ -55,7 +59,7 @@ public class LivroService {
             livro.setAtivo(false);
             livroRepository.save(livro);
         } else {
-            throw new IllegalArgumentException("Livro não encontrado");
+            throw new IllegalArgumentException("Livro não encontrado!");
         }
     }
 }
