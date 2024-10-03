@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -58,8 +58,8 @@ class EmprestimoControllerTest {
                 .ativo(true)
                 .build();
 
-        Date dataEmprestimo = new Date();
-        Date dataDevolucao = new Date(System.currentTimeMillis() + (7 * 24 * 60 * 60 * 1000L)); // 7 dias. ps: deveria ter usado LocalTime :/
+        LocalDateTime dataEmprestimo = LocalDateTime.now();
+        LocalDateTime dataDevolucao = dataEmprestimo.plusDays(7);
 
         emprestimo = Emprestimo.builder()
                 .id(1L)

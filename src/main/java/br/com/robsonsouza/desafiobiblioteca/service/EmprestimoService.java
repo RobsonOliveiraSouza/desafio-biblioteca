@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
@@ -37,7 +38,7 @@ public class EmprestimoService {
 
         emprestimo.setLivro(livro.get());
         emprestimo.setUsuario(usuario.get());
-        emprestimo.setDataEmprestimo(new Date());
+        emprestimo.setDataEmprestimo(LocalDateTime.now());
         emprestimo.setStatus("EMPRESTADO");
 
         return emprestimoRepository.save(emprestimo);
@@ -55,7 +56,7 @@ public class EmprestimoService {
         String status = emprestimoDto.getStatus();
         if (status.equalsIgnoreCase("LIBERADO")) {
             emprestimo.setStatus(status);
-            emprestimo.setDataDevolucao(new Date());
+            emprestimo.setDataDevolucao(LocalDateTime.now());
         } else if (status.equalsIgnoreCase("EMPRESTADO")) {
             emprestimo.setStatus(status);
             emprestimo.setDataDevolucao(null);

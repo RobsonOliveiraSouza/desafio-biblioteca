@@ -2,7 +2,7 @@ package br.com.robsonsouza.desafiobiblioteca.dto;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class LivroDto {
@@ -10,6 +10,6 @@ public class LivroDto {
     private String titulo;
     private String autor;
     private String isbn;
-    private Date dataPublicacao;
+    private LocalDateTime dataPublicacao;
     private String categoria;
 }

@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "usuario")
@@ -30,7 +30,7 @@ public class Usuario {
 
     @NotNull(message = "O campo de data de cadastro não pode estar em branco!")
     @Past(message = "A data de publicação é invalida!")
-    private Date dataCadastro;
+    private LocalDateTime dataCadastro;
 
     @NotBlank(message = "O campo telefone não pode estar em branco!")
     @Pattern(regexp = "\\{2}\\{9}", message = "O telefone deve possuir DDD + 9 digitos.")

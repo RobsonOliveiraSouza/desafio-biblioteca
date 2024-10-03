@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "emprestimo")
@@ -35,10 +35,10 @@ public class Emprestimo {
 
     @NotNull(message = "A data de emprestimo está em branco")
     @Past(message = "A data de emprestimo é invalida!")
-    private Date dataEmprestimo;
+    private LocalDateTime dataEmprestimo;
 
     @NotNull(message = "A data de devolução está em branco")
-    private Date dataDevolucao;
+    private LocalDateTime dataDevolucao;
 
     @NotBlank(message = "O campo status não pode estar vazio")
     private String status;

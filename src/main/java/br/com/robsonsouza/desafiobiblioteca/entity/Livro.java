@@ -9,7 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "livro")
@@ -35,7 +36,7 @@ public class Livro {
 
     @Past(message = "A data de publicação é invalida!")
     @NotNull(message = "a data da publicação não pode ser vazia!")
-    private Date dataPublicacao;
+    private LocalDateTime dataPublicacao;
 
     @NotBlank(message = "a categoria do livro não pode estar em branco!")
     private String categoria;

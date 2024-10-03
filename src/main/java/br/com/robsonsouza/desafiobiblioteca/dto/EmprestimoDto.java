@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 public class EmprestimoDto {
@@ -18,7 +18,7 @@ public class EmprestimoDto {
     private String isbn;
 
     @NotNull(message = "Data do emprestimo invalida")
-    private Date dataEmprestimo;
+    private LocalDateTime dataEmprestimo;
 
     @NotBlank(message = "Não consta o status do emprestimo!")
     private String status;
