@@ -2,6 +2,7 @@ package br.com.robsonsouza.desafiobiblioteca.controller;
 
 import br.com.robsonsouza.desafiobiblioteca.dto.EmprestimoDto;
 import br.com.robsonsouza.desafiobiblioteca.entity.Emprestimo;
+import br.com.robsonsouza.desafiobiblioteca.entity.Livro;
 import br.com.robsonsouza.desafiobiblioteca.service.EmprestimoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -34,4 +35,9 @@ public class EmprestimoController {
         return ResponseEntity.ok(emprestimos);
     }
 
+    @GetMapping("/recomendar")
+    public ResponseEntity<List<Livro>> recomendarLivroPorCategoria(@RequestParam Long usuarioId) {
+        List<Livro> livroRecomendado = emprestimoService.recomendarLivroPorCategoria(usuarioId);
+        return ResponseEntity.ok(livroRecomendado);
+    }
 }

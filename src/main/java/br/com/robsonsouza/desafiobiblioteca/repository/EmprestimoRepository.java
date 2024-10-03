@@ -5,7 +5,10 @@ import br.com.robsonsouza.desafiobiblioteca.entity.Livro;
 import br.com.robsonsouza.desafiobiblioteca.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface EmprestimoRepository extends JpaRepository<Emprestimo, Long> {
     Boolean existsByLivroAndStatus(Livro livro, String status);
     Boolean existsByUsuarioAndStatus(Usuario usuario, String status);
+    List<Emprestimo> findByUsuarioId(Long usuarioId);
 }
