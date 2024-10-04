@@ -29,6 +29,6 @@ O projeto é organizado nas seguintes camadas:
 - **JPA e Hibernate**: Para manipulação do banco de dados.
 - **PostgreSQL**: Banco de dados para armazenar os dados.
 - **JUnit e Mockito**: Para construção de testes unitários.
-- **Swagger**: Para escrever a documentação necessaria.
+- **Swagger**: Para escrever a documentação necessaria.(http://localhost:8080/swagger-ui/index.html)
 - **Postman**: Para testar as requisões HTTP.
-- **Angular**: Para o desenvolvimento das telas (Front-end).
+- **Angular**: Para o desenvolvimento das telas Front-end. (http://localhost:4200/).
