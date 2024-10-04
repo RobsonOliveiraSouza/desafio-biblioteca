@@ -29,7 +29,6 @@ public class Usuario {
     private String email;
 
     @NotNull(message = "O campo de data de cadastro não pode estar em branco!")
-    @Past(message = "A data de publicação é invalida!")
     private LocalDateTime dataCadastro;
 
     @NotBlank(message = "O campo telefone não pode estar em branco!")

@@ -6,6 +6,7 @@ import br.com.robsonsouza.desafiobiblioteca.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,9 @@ public class UsuarioService {
     private final EmprestimoRepository emprestimoRepository;
 
     public Usuario create(Usuario usuario) {
+        usuario.setDataCadastro(LocalDateTime.now());
         return usuarioRepository.save(usuario);
+
     }
 
     public List<Usuario> list() {

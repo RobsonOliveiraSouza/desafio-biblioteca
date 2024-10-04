@@ -6,6 +6,7 @@ import br.com.robsonsouza.desafiobiblioteca.repository.LivroRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class LivroService {
     private final EmprestimoRepository emprestimoRepository;
 
     public Livro create(Livro livro) {
+        livro.setDataPublicacao(LocalDateTime.now());
         return livroRepository.save(livro);
     }
 
