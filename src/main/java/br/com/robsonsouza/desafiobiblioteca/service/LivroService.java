@@ -44,7 +44,6 @@ public class LivroService {
         livroExistente.setDataPublicacao(livroAtualizado.getDataPublicacao());
         livroExistente.setCategoria(livroAtualizado.getCategoria());
 
-
         return livroRepository.save(livroExistente);
     }
 
